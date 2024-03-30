@@ -1,0 +1,14 @@
+services:
+  db:
+    image: mariadb:10.5.23
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MARIADB_ROOT_PASSWORD=homeland
+      - MARIADB_DATABASE=homeland_dev
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
