@@ -15,6 +15,6 @@ public class Image {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "house_id")
-    private House house;
+    @JoinColumn(name = "property_id")
+    private Property property;
 }

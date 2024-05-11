@@ -1,6 +1,7 @@
 package com.homeland.homeland.service.implement;
 
 import com.homeland.homeland.dto.PropertyDto;
+import com.homeland.homeland.model.Image;
 import com.homeland.homeland.model.Property;
 import com.homeland.homeland.repository.PropertyRepository;
 import com.homeland.homeland.service.PropertyService;
@@ -29,7 +30,7 @@ public class PropertyServiceImpl implements PropertyService {
                 .id(property.getId())
                 .title(property.getTitle())
                 .price(property.getPrice())
-                .image(property.getImage())
+                .images(property.getImages().stream().map(Image::getUrl).toList())
                 .beds(property.getBeds())
                 .baths(property.getBaths())
                 .areas(property.getAreas())
@@ -39,7 +40,7 @@ public class PropertyServiceImpl implements PropertyService {
                 .description(property.getDescription())
                 .location(property.getLocation())
                 .agentName(property.getAgentName())
-                .propertiesStatusType(property.getPropertiesStatusType())
+                .status(property.getStatus().toString())
                 .createdAt(property.getCreatedAt())
                 .updatedAt(property.getUpdatedAt())
                 .build();

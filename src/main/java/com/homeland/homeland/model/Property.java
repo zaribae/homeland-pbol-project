@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,8 +24,6 @@ public class Property {
     private String title;
 
     private String price;
-
-    private String image;
 
     private String beds;
 
@@ -43,7 +43,10 @@ public class Property {
 
     private String agentName;
 
-    private String propertiesStatusType;
+    private PropertyStatus status;
+
+    @OneToMany(mappedBy = "property")
+    private List<Image> images;
 
     @CreationTimestamp
     private String createdAt;
