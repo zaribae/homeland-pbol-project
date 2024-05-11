@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
-    private PropertyRepository propertyRepository;
+    private final PropertyRepository propertyRepository;
 
     public PropertyServiceImpl(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
@@ -20,7 +20,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<PropertyDto> findAllProperties() {
         List<Property> properties = propertyRepository.findAll();
-        return properties.stream().map((property) -> mapPropertyToDto(property)).collect(Collectors.toList());
+        return properties.stream().map(this::mapPropertyToDto).collect(Collectors.toList());
     }
 
     private PropertyDto mapPropertyToDto(Property property) {

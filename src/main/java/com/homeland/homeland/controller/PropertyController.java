@@ -10,7 +10,7 @@ import java.util.List;
 
 @Controller
 public class PropertyController {
-    private PropertyService propertyService;
+    private final PropertyService propertyService;
 
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
