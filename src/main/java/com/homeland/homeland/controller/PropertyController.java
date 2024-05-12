@@ -2,12 +2,14 @@ package com.homeland.homeland.controller;
 
 import com.homeland.homeland.dto.PropertyDto;
 import com.homeland.homeland.dto.PropertyRequest;
+import com.homeland.homeland.service.ImageService;
 import com.homeland.homeland.service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -17,24 +19,32 @@ import java.util.List;
 public class PropertyController {
 
     private final PropertyService propertyService;
+    private final ImageService imageService;
+
+    @GetMapping("/")
+    public String listProperties(Model model) {
+        model.addAttribute("properties", propertyService.findAllProperties());
+        model.addAttribute("topProperties", propertyService.findLatestProperties());
+        return "index";
+    }
 
     @GetMapping("/properties")
-    public String listProperties(Model model) {
-        List<PropertyDto> properties = propertyService.findAllProperties();
-        model.addAttribute("properties", properties);
-        return "index";
-    }
-
-    @GetMapping("/new")
     public String newProperty(Model model) {
         model.addAttribute("request", new PropertyRequest());
-        return "add";
+        return "new-property";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/properties")
     public String addProperty(@ModelAttribute("request") PropertyRequest request) {
         propertyService.addProperty(request);
-        return "index";
+        return "new-property";
+    }
+
+    @GetMapping("/properties/{id}")
+    public String showProperty(Model model, @PathVariable Long id) {
+        model.addAttribute("property", propertyService.findPropertyById(id));
+        model.addAttribute("topProperties", propertyService.findLatestProperties());
+        return "property-details";
     }
 
 }

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface PropertyService {
     List<PropertyDto> findAllProperties();
-    PropertyDto addProperty(PropertyRequest propertyRequest);
+    void addProperty(PropertyRequest propertyRequest);
+    PropertyDto findPropertyById(Long id);
+    List<PropertyDto> findLatestProperties();
 }

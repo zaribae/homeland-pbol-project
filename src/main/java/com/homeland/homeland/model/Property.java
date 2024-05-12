@@ -38,6 +38,7 @@ public class Property {
 
     private Integer pricePerSqft;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private String location;

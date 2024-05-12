@@ -2,7 +2,6 @@ package com.homeland.homeland.service.implement;
 
 import com.homeland.homeland.dto.PropertyDto;
 import com.homeland.homeland.dto.PropertyRequest;
-import com.homeland.homeland.model.Image;
 import com.homeland.homeland.model.Property;
 import com.homeland.homeland.model.PropertyStatus;
 import com.homeland.homeland.repository.ImageRepository;
@@ -31,7 +30,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PropertyDto addProperty(PropertyRequest request) {
+    public void addProperty(PropertyRequest request) {
         var property = propertyRepository.save(Property.builder()
                 .title(request.getTitle())
                 .price(request.getPrice())
@@ -51,7 +50,17 @@ public class PropertyServiceImpl implements PropertyService {
             imageService.save(image, property);
         });
 
-        return mapPropertyToDto(propertyRepository.save(property));
+        mapPropertyToDto(propertyRepository.save(property));
+    }
+
+    @Override
+    public PropertyDto findPropertyById(Long id) {
+        return mapPropertyToDto(propertyRepository.findById(id).orElseThrow());
+    }
+
+    @Override
+    public List<PropertyDto> findLatestProperties() {
+        return propertyRepository.findTop3ByOrderByIdDesc().stream().map(this::mapPropertyToDto).toList();
     }
 
     private PropertyDto mapPropertyToDto(Property property) {

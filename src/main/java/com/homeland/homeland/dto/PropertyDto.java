@@ -1,7 +1,5 @@
 package com.homeland.homeland.dto;
 
-import com.homeland.homeland.model.Image;
-import com.homeland.homeland.model.PropertyStatus;
 import lombok.Builder;
 import lombok.Data;
 

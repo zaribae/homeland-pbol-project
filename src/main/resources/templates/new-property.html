@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <h1 class="row my-5">Add new property data</h1>
-    <form class="row g-3" th:action="@{/new}" method="post" th:object="${request}" enctype="multipart/form-data">
+    <form class="row g-3" th:action="@{/properties}" method="post" th:object="${request}" enctype="multipart/form-data">
         <div class="col-12">
             <label class="form-label" for="title">Title</label>
             <input class="form-control" id="title" name="title" type="text" th:field="*{title}">
