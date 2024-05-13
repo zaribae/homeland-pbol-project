@@ -7,8 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum PropertyType {
 
-    HOUSE("House"),
-    APARTMENT("Apartment");
+    CONDO("Condo"),
+    COMMERCIAL_BUILDING("Commercial Building"),
+    LAND_PROPERTY("Land Property");
 
     private final String displayValue;
 }
