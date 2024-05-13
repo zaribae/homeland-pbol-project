@@ -11,7 +11,7 @@ import java.util.List;
 public class PropertyDto {
     private Long id;
     private String title;
-    private Integer price;
+    private String price;
     private List<String> images;
     private Integer beds;
     private Integer baths;

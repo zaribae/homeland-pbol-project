@@ -3,16 +3,16 @@ package com.homeland.homeland.service.implement;
 import com.homeland.homeland.dto.PropertyDto;
 import com.homeland.homeland.dto.PropertyRequest;
 import com.homeland.homeland.model.Property;
-import com.homeland.homeland.model.PropertyStatus;
-import com.homeland.homeland.repository.ImageRepository;
 import com.homeland.homeland.repository.PropertyRepository;
 import com.homeland.homeland.service.ImageService;
 import com.homeland.homeland.service.PropertyService;
+import com.homeland.homeland.utilities.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,7 +21,12 @@ public class PropertyServiceImpl implements PropertyService {
 
     private final PropertyRepository propertyRepository;
     private final ImageService imageService;
-    private final ImageRepository imageRepository;
+
+    @Override
+    public Property findById(Long id) {
+        return propertyRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Property not found with id: " + id));
+    }
 
     @Override
     public List<PropertyDto> findAllProperties() {
@@ -31,20 +36,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public void addProperty(PropertyRequest request) {
-        var property = propertyRepository.save(Property.builder()
-                .title(request.getTitle())
-                .price(request.getPrice())
-                .beds(request.getBeds())
-                .baths(request.getBaths())
-                .areas(request.getAreas())
-                .homeType(request.getType())
-                .yearBuilt(request.getYearBuilt())
-                .pricePerSqft(request.getPricePerSqft())
-                .description(request.getDescription())
-                .location(request.getLocation())
-                .agentName(request.getAgent())
-                .status(PropertyStatus.NOT_SOLD)
-                .build());
+        var property = propertyRepository.save(Mapper.mapToPropertyFromRequest(request));
 
         Arrays.stream(request.getImages()).forEach(image -> {
             imageService.save(image, property);
@@ -64,24 +56,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     private PropertyDto mapPropertyToDto(Property property) {
-
-        return PropertyDto.builder()
-                .id(property.getId())
-                .title(property.getTitle())
-                .price(property.getPrice())
-                .images(imageService.findByPropertyId(property.getId()))
-                .beds(property.getBeds())
-                .baths(property.getBaths())
-                .areas(property.getAreas())
-                .homeType(property.getHomeType().toString())
-                .yearBuilt(property.getYearBuilt())
-                .pricePerSqft(property.getPricePerSqft())
-                .description(property.getDescription())
-                .location(property.getLocation())
-                .agentName(property.getAgentName())
-                .status(property.getStatus().toString())
-                .createdAt(property.getCreatedAt())
-                .updatedAt(property.getUpdatedAt())
-                .build();
+        List<String> images = imageService.findByPropertyId(property.getId());
+        return Mapper.mapToPropertyDto(property, images);
     }
 }

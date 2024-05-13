@@ -10,7 +10,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -48,11 +47,8 @@ public class ImageServiceImpl implements ImageService {
             throw new RuntimeException("Could not save image", exception);
         }
 
-        String url = MvcUriComponentsBuilder
-                .fromMethodName(ImageController.class, "getImage", fileName).build().toString();
-
         imageRepository.save(Image.builder()
-                .url(url)
+                .url(fileName)
                 .property(property)
                 .build());
     }

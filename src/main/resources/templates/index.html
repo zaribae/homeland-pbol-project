@@ -14,7 +14,7 @@
                     <div class="col-md-10">
                         <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
                         <h1 class="mb-2" th:text="${property.title}">625 S. Berendo St</h1>
-                        <p class="mb-5"><strong class="h2 text-success font-weight-bold" th:text="'Rp. ' + ${property.price}">$1,000,500</strong></p>
+                        <p class="mb-5"><strong class="h2 text-success font-weight-bold" th:text="${property.price}">$1,000,500</strong></p>
                         <p><a class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2" th:href="|/properties/${property.id}|">See Details</a>
                         </p>
                     </div>
@@ -115,13 +115,17 @@
                             <img alt="Image" class="img-fluid" th:src="${property.images.get(0)}">
                         </a>
                         <div class="p-4 property-body">
-                            <a class="property-favorite" href="#"><span class="icon-heart-o"></span></a>
+                            <form th:action="|/favorites/${property.id}|" method="post">
+                                <button type="submit" class="property-favorite" style="cursor: pointer">
+                                    <span class="icon-heart-o"></span>
+                                </button>
+                            </form>
                             <h2 class="property-title"><a th:href="|/properties/${property.id}|"
                                                           th:text="${property.title}">625 S. Berendo St</a></h2>
                             <span class="property-location d-block mb-3"><span
                                     class="property-icon icon-room"></span> <span th:text="${property.location}"></span></span>
                             <strong class="property-price text-primary mb-3 d-block text-success"
-                                    th:text="'Rp. ' + ${property.price}">$2,265,500</strong>
+                                    th:text="${property.price}">$2,265,500</strong>
                             <ul class="property-specs-wrap mb-3 mb-lg-0">
                                 <li>
                                     <span class="property-specs">Beds</span>
