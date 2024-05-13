@@ -3,25 +3,26 @@ package com.homeland.homeland.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 @Builder
 public class PropertyDto {
     private Long id;
     private String title;
-    private String price;
-    private String image;
-    private String beds;
-    private String baths;
-    private String areas;
+    private Integer price;
+    private List<String> images;
+    private Integer beds;
+    private Integer baths;
+    private Integer areas;
     private String homeType;
-    private String yearBuilt;
-    private String pricePerSqft;
+    private Integer yearBuilt;
+    private Integer pricePerSqft;
     private String description;
     private String location;
     private String agentName;
-    private String propertiesStatusType;
+    private String status;
     private String createdAt;
     private String updatedAt;
-
 }

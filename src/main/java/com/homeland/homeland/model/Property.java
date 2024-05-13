@@ -2,16 +2,19 @@ package com.homeland.homeland.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
+@Builder
 @Table(name = "properties")
 public class Property {
 
@@ -21,29 +24,28 @@ public class Property {
 
     private String title;
 
-    private String price;
+    private Integer price;
 
-    private String image;
+    private Integer beds;
 
-    private String beds;
+    private Integer baths;
 
-    private String baths;
+    private Integer areas;
 
-    private String areas;
+    private PropertyType homeType;
 
-    private String homeType;
+    private Integer yearBuilt;
 
-    private String yearBuilt;
+    private Integer pricePerSqft;
 
-    private String pricePerSqft;
-
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private String location;
 
     private String agentName;
 
-    private String propertiesStatusType;
+    private PropertyStatus status;
 
     @CreationTimestamp
     private String createdAt;
