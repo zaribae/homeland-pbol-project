@@ -73,7 +73,7 @@ public class PropertyServiceImpl implements PropertyService {
                 .beds(property.getBeds())
                 .baths(property.getBaths())
                 .areas(property.getAreas())
-                .homeType(property.getHomeType().toString())
+                .homeType(property.getHomeType().getDisplayValue())
                 .yearBuilt(property.getYearBuilt())
                 .pricePerSqft(property.getPricePerSqft())
                 .description(property.getDescription())
