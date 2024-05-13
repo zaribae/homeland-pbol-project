@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/admin-components :: headFragment"></head>
+
+<body>
+
+<!--*******************
+    Preloader start
+********************-->
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+</div>
+<!--*******************
+    Preloader end
+********************-->
+
+
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <th:block th:replace="fragments/admin-components :: header"></th:block>
+
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">People Interested</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mb-0" style="color: rgba(0, 0, 0, 0.8)">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Property</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="message : ${messages}">
+                                        <td th:text="${message.id}">1</td>
+                                        <td th:text="${message.name}">Lew Shawon</td>
+                                        <td><span th:text="${message.email}">Dell-985</span></td>
+                                        <td><span th:text="${message.phone}">456 pcs</span></td>
+                                        <td>
+                                            <a class="badge badge-success"
+                                               th:href="|/properties/${message.property.id}|"
+                                               th:text="${message.property.title}"
+                                            >
+                                                Done
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+
+<th:block th:replace="fragments/admin-components :: scripts"></th:block>
+
+</body>
+
+</html>

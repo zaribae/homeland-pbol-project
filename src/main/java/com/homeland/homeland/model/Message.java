@@ -26,7 +26,7 @@ public class Message {
 
     private String phone;
 
-    @OneToOne
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "property_id")
     private Property property;

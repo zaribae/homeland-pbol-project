@@ -12,7 +12,7 @@
             <div class="col-md-10">
                 <span class="d-inline-block text-white px-3 mb-3 property-offer-type rounded">Property Details of</span>
                 <h1 class="mb-2" th:text="${property.title}">625 S. Berendo St</h1>
-                <p class="mb-5"><strong class="h2 text-success font-weight-bold" th:text="'Rp. ' +  ${property.price}">$1,000,500</strong>
+                <p class="mb-5"><strong class="h2 text-success font-weight-bold" th:text="${property.price}">$1,000,500</strong>
                 </p>
             </div>
         </div>
@@ -33,8 +33,8 @@
                 <div class="bg-white property-body border-bottom border-left border-right">
                     <div class="row mb-5">
                         <div class="col-md-6">
-                            <strong class="text-success h1 mb-3"
-                                    th:text="'Rp. ' +  ${property.price}">$1,000,500</strong>
+                            <strong class="text-success h3 mb-3"
+                                    th:text="${property.price}">$1,000,500</strong>
                         </div>
                         <div class="col-md-6">
                             <ul class="property-specs-wrap mb-3 mb-lg-0  float-lg-right">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                             <span class="d-inline-block text-black mb-0 caption-text">Price/Sqft</span>
-                            <strong class="d-block" th:text="'Rp. ' +  ${property.pricePerSqft}">$520</strong>
+                            <strong class="d-block" th:text="${property.pricePerSqft}">$520</strong>
                         </div>
                     </div>
                     <h2 class="h4 text-black">More Info</h2>
@@ -88,6 +88,7 @@
             <div class="col-lg-4">
                 <div class="bg-white widget border rounded">
                     <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
+                    <div th:if="${success}" class="alert-success my-3 p-2">Message sent succesfully</div>
                     <form th:action="@{/messages}" method="post" th:object="${message}" class="form-contact-agent">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -106,18 +107,6 @@
                             <input class="btn btn-primary" type="submit" value="Send Message">
                         </div>
                     </form>
-                </div>
-
-                <div class="bg-white widget border rounded">
-                    <h3 class="h4 text-black widget-title mb-3 ml-0">Share</h3>
-                    <div class="px-3" style="margin-left: -15px;">
-                        <a class="pt-3 pb-3 pr-3 pl-0" href="https://www.facebook.com/sharer/sharer.php?u=&quote="><span
-                                class="icon-facebook"></span></a>
-                        <a class="pt-3 pb-3 pr-3 pl-0" href="https://twitter.com/intent/tweet?text=&url="><span
-                                class="icon-twitter"></span></a>
-                        <a class="pt-3 pb-3 pr-3 pl-0" href="https://www.linkedin.com/sharing/share-offsite/?url="><span
-                                class="icon-linkedin"></span></a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -149,7 +138,7 @@
                             <a class="property-favorite" href="#"><span class="icon-heart-o"></span></a>
                             <h2 class="property-title"><a th:href="|/properties/${property.id}|" th:text="${property.title}">853 S Lucerne Blvd</a></h2>
                             <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <span th:text="${property.location}"></span></span>
-                            <strong class="property-price text-primary mb-3 d-block text-success" th:text="'Rp. ' + ${property.price}">$2,265,500</strong>
+                            <strong class="property-price text-primary mb-3 d-block text-success" th:text="${property.price}">$2,265,500</strong>
                             <ul class="property-specs-wrap mb-3 mb-lg-0">
                                 <li>
                                     <span class="property-specs">Beds</span>
@@ -161,7 +150,7 @@
                                 </li>
                                 <li>
                                     <span class="property-specs">SQ FT</span>
-                                    <span class="property-specs-number" th:text="'Rp. ' + ${property.pricePerSqft}">5,500</span>
+                                    <span class="property-specs-number" th:text="${property.pricePerSqft}">5,500</span>
                                 </li>
                             </ul>
                         </div>

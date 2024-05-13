@@ -8,19 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/messages")
 @RequiredArgsConstructor
 public class MessageController {
 
     private final MessageService messageService;
 
-    @PostMapping
+    @PostMapping("/messages")
     public String sendMessage(HttpServletRequest servletRequest, Model model, @ModelAttribute("message")MessageRequest request) {
         messageService.save(request);
-
+        model.addAttribute("success", true);
         String referer = servletRequest.getHeader("Referer");
         return "redirect:" + referer;
     }

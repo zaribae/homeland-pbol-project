@@ -3,8 +3,8 @@ package com.homeland.homeland.service.implement;
 import com.homeland.homeland.dto.MessageRequest;
 import com.homeland.homeland.model.Message;
 import com.homeland.homeland.repository.MessageRepository;
-import com.homeland.homeland.repository.PropertyRepository;
 import com.homeland.homeland.service.MessageService;
+import com.homeland.homeland.service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
-    private final PropertyRepository propertyRepository;
+    private final PropertyService propertyService;
 
     @Override
     public void save(MessageRequest request) {
@@ -21,7 +21,12 @@ public class MessageServiceImpl implements MessageService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .phone(request.getPhone())
-                .property(propertyRepository.findById(request.getPropertyId()).orElseThrow())
+                .property(propertyService.findById(request.getPropertyId()))
                 .build());
+    }
+
+    @Override
+    public Iterable<Message> findAll() {
+        return messageRepository.findAll();
     }
 }
