@@ -1,5 +1,6 @@
 package com.homeland.homeland.controller;
 
+import com.homeland.homeland.dto.MessageRequest;
 import com.homeland.homeland.dto.PropertyDto;
 import com.homeland.homeland.dto.PropertyRequest;
 import com.homeland.homeland.service.ImageService;
@@ -28,7 +29,7 @@ public class PropertyController {
         return "index";
     }
 
-    @GetMapping("/properties")
+    @GetMapping("/properties/add")
     public String newProperty(Model model) {
         model.addAttribute("request", new PropertyRequest());
         return "new-property";
@@ -37,13 +38,14 @@ public class PropertyController {
     @PostMapping("/properties")
     public String addProperty(@ModelAttribute("request") PropertyRequest request) {
         propertyService.addProperty(request);
-        return "new-property";
+        return "redirect:/properties/add";
     }
 
     @GetMapping("/properties/{id}")
     public String showProperty(Model model, @PathVariable Long id) {
         model.addAttribute("property", propertyService.findPropertyById(id));
         model.addAttribute("topProperties", propertyService.findLatestProperties());
+        model.addAttribute("message", new MessageRequest());
         return "property-details";
     }
 

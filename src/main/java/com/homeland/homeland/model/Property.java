@@ -32,6 +32,7 @@ public class Property {
 
     private Integer areas;
 
+    @Enumerated(EnumType.STRING)
     private PropertyType homeType;
 
     private Integer yearBuilt;
@@ -45,6 +46,7 @@ public class Property {
 
     private String agentName;
 
+    @Enumerated(EnumType.STRING)
     private PropertyStatus status;
 
     @CreationTimestamp

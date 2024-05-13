@@ -88,19 +88,20 @@
             <div class="col-lg-4">
                 <div class="bg-white widget border rounded">
                     <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-                    <form action="" class="form-contact-agent">
+                    <form th:action="@{/messages}" method="post" th:object="${message}" class="form-contact-agent">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input class="form-control" id="name" type="text">
+                            <input class="form-control" id="name" type="text" th:field="*{name}">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input class="form-control" id="email" type="email">
+                            <input class="form-control" id="email" type="email" th:field="*{email}">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input class="form-control" id="phone" type="text">
+                            <input class="form-control" id="phone" type="text" th:field="*{phone}">
                         </div>
+                        <input type="hidden" th:value="${property.id}" th:attr="name='propertyId'">
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit" value="Send Message">
                         </div>
